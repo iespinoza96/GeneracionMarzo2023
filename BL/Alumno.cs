@@ -15,7 +15,7 @@ namespace BL
         public static ML.Result Add(ML.Alumno alumno)
         {
             ML.Result result = new ML.Result();
-            try
+            try 
             {
                 using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
                 {

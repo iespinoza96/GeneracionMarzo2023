@@ -29,7 +29,7 @@ namespace PL
                     break;
                 case 4:
                     //Capa.Clase.Metodo();
-                    //PL.Alumno.GetAll();
+                    PL.Alumno.GetAll();
                     break;
                 case 5:
                     //Capa.Clase.Metodo();
@@ -38,6 +38,7 @@ namespace PL
                 default:
                     break;
             }
+            Console.ReadKey();
             
         }
     }

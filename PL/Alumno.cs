@@ -80,6 +80,29 @@ namespace PL
         }
         //Delete    
         //GetAll
+        public static void GetAll()
+        {
+            ML.Result result = BL.Alumno.GetAll();
+
+            if (result.Correct)
+            {
+                foreach (ML.Alumno alumno in result.Objects) 
+                {
+                    Console.WriteLine("IdAlumno: " + alumno.IdAlumno);
+                    Console.WriteLine("Nombre: "+ alumno.Nombre);
+                    Console.WriteLine("Apellido Paterno: "+ alumno.ApellidoPaterno);
+                    Console.WriteLine("Apellido Materno: "+ alumno.ApellidoMaterno);
+                    Console.WriteLine("Fecha de nacimiento:" + alumno.FechaNacimiento);
+                    Console.WriteLine("-----------------------------------------------");
+
+                }
+
+            }
+            else 
+            { 
+                Console.WriteLine(result.ErrorMessage); 
+            }
+        }
         //GetById
 
     }

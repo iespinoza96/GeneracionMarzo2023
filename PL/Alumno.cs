@@ -84,7 +84,7 @@ namespace PL
         {
             ML.Result result = BL.Alumno.GetAll();
 
-            if (result.Correct)
+            if (result.Correct)  
             {
                 foreach (ML.Alumno alumno in result.Objects) 
                 {

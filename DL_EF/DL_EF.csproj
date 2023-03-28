@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{53D13846-E021-498E-BEA0-6931A3CEA8ED}</ProjectGuid>
+    <ProjectGuid>{CBC19DB2-CDEB-4292-A37A-9CEC91DA323B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>DL_EF</RootNamespace>
+    <AssemblyName>DL_EF</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,26 +53,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumno.cs" />
+    <Compile Include="Alumno.cs">
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlumnoGetAll_Result.cs">
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlumnoGetById_Result.cs">
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="IEspinozaProgramacionNCapasGM2023.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEspinozaProgramacionNCapasGM2023.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEspinozaProgramacionNCapasGM2023.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semestre.cs">
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DL\DL.csproj">
-      <Project>{59594bea-f7e7-435f-a609-7bc3c0ade96d}</Project>
-      <Name>DL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DL_EF\DL_EF.csproj">
-      <Project>{cbc19db2-cdeb-4292-a37a-9cec91da323b}</Project>
-      <Name>DL_EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ML\ML.csproj">
-      <Project>{7dab80db-7c17-47c9-90db-cdeacf4d1cad}</Project>
-      <Name>ML</Name>
-    </ProjectReference>
+    <EntityDeploy Include="IEspinozaProgramacionNCapasGM2023.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IEspinozaProgramacionNCapasGM2023.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.Config" />
+    <None Include="IEspinozaProgramacionNCapasGM2023.edmx.diagram">
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IEspinozaProgramacionNCapasGM2023.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEspinozaProgramacionNCapasGM2023.Context.cs</LastGenOutput>
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.edmx</DependentUpon>
+    </Content>
+    <Content Include="IEspinozaProgramacionNCapasGM2023.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IEspinozaProgramacionNCapasGM2023.edmx</DependentUpon>
+      <LastGenOutput>IEspinozaProgramacionNCapasGM2023.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

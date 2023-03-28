@@ -408,6 +408,25 @@ namespace BL
         public static ML.Result AddEF(ML.Alumno alumno)
         {
             ML.Result result = new ML.Result();
+
+            try
+            {
+                using(DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    int queryEF = context.AlumnoAdd(alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre);
+
+                    if (queryEF > 0)
+                    {
+                        result.Correct = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrio un error al insertar el alumno" + ex;    
+            }
             return result;
         }
 

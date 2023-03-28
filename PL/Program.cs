@@ -33,7 +33,7 @@ namespace PL
                     break;
                 case 5:
                     //Capa.Clase.Metodo();
-                   // PL.Alumno.GetById();
+                   PL.Alumno.GetById();
                     break;
                 default:
                     break;

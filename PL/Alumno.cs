@@ -12,11 +12,11 @@ namespace PL
         //Add
         public static void Add()
         {
-           //Capa.Clase    objeto   new Clase();
+            //Capa.Clase    objeto   new Clase();
             ML.Alumno alumno = new ML.Alumno();//instancia de mi clase alumno
 
             Console.WriteLine("Inserte el nombre del alumno: ");
-          //objeto.propiedades
+            //objeto.propiedades
             alumno.Nombre = Console.ReadLine();
             Console.WriteLine("Inserte el apellido paterno del alumno: ");
             alumno.ApellidoPaterno = Console.ReadLine();
@@ -25,8 +25,13 @@ namespace PL
             Console.WriteLine("Inserte la fecha nacimiento del alumno: ");
             alumno.FechaNacimiento = DateTime.Parse(Console.ReadLine());
 
-          //Capa.Clase.Metodo(parametros);
-           ML.Result result = BL.Alumno.Add(alumno);
+            Console.WriteLine("Inserte el id del semestre: ");
+            alumno.Semestre = new ML.Semestre();
+            alumno.Semestre.IdSemestre = byte.Parse(Console.ReadLine());
+
+            //Capa.Clase.Metodo(parametros);
+            // ML.Result result = BL.Alumno.Add(alumno); //Query
+            ML.Result result = BL.Alumno.AddSP(alumno); //SP
 
             if (result.Correct)
             {
@@ -35,7 +40,7 @@ namespace PL
             }
             else
             {
-                Console.WriteLine(result.ErrorMessage); 
+                Console.WriteLine(result.ErrorMessage);
             }
 
 
@@ -84,26 +89,56 @@ namespace PL
         {
             ML.Result result = BL.Alumno.GetAll();
 
-            if (result.Correct)  
+            if (result.Correct)
             {
-                foreach (ML.Alumno alumno in result.Objects) 
+                foreach (ML.Alumno alumno in result.Objects)
                 {
                     Console.WriteLine("IdAlumno: " + alumno.IdAlumno);
-                    Console.WriteLine("Nombre: "+ alumno.Nombre);
-                    Console.WriteLine("Apellido Paterno: "+ alumno.ApellidoPaterno);
-                    Console.WriteLine("Apellido Materno: "+ alumno.ApellidoMaterno);
+                    Console.WriteLine("Nombre: " + alumno.Nombre);
+                    Console.WriteLine("Apellido Paterno: " + alumno.ApellidoPaterno);
+                    Console.WriteLine("Apellido Materno: " + alumno.ApellidoMaterno);
                     Console.WriteLine("Fecha de nacimiento:" + alumno.FechaNacimiento);
                     Console.WriteLine("-----------------------------------------------");
 
                 }
 
             }
-            else 
-            { 
-                Console.WriteLine(result.ErrorMessage); 
+            else
+            {
+                Console.WriteLine(result.ErrorMessage);
             }
         }
         //GetById
+        public static void GetById()
+        {
+            Console.WriteLine("Ingrese el id del alumno: ");
+            //objeto.propiedades
+            int idAlumno = int.Parse(Console.ReadLine());
+
+            ML.Result result = BL.Alumno.GetById(idAlumno);
+
+            if (result.Correct)
+            {
+
+                ML.Alumno alumno = (ML.Alumno)result.Object;//
+
+                
+
+                Console.WriteLine("IdAlumno: " + alumno.IdAlumno);
+                Console.WriteLine("Nombre: " + alumno.Nombre);
+                Console.WriteLine("Apellido Paterno: " + alumno.ApellidoPaterno);
+                Console.WriteLine("Apellido Materno: " + alumno.ApellidoMaterno);
+                Console.WriteLine("Fecha de nacimiento:" + alumno.FechaNacimiento);
+                Console.WriteLine("-----------------------------------------------");
+
+
+
+            }
+            else
+            {
+                Console.WriteLine(result.ErrorMessage);
+            }
+        }
 
     }
 }

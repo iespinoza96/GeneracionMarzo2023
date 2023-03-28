@@ -403,6 +403,14 @@ namespace BL
             return result;
         }
 
+        //EF
+
+        public static ML.Result AddEF(ML.Alumno alumno)
+        {
+            ML.Result result = new ML.Result();
+            return result;
+        }
+
 
 
     }

@@ -233,6 +233,10 @@ namespace BL
                                 alumno.ApellidoPaterno = row[2].ToString();
                                 alumno.ApellidoMaterno = row[3].ToString();
                                 alumno.FechaNacimiento = DateTime.Parse(row[4].ToString());
+
+                                alumno.Semestre = new ML.Semestre();
+                                alumno.Semestre.IdSemestre = byte.Parse(row[5].ToString());
+
                                 result.Objects.Add(alumno);
                             }
 

@@ -98,6 +98,8 @@ namespace PL
                     Console.WriteLine("Apellido Paterno: " + alumno.ApellidoPaterno);
                     Console.WriteLine("Apellido Materno: " + alumno.ApellidoMaterno);
                     Console.WriteLine("Fecha de nacimiento:" + alumno.FechaNacimiento);
+                    Console.WriteLine("Semestre :" + alumno.Semestre.IdSemestre);
+
                     Console.WriteLine("-----------------------------------------------");
 
                 }

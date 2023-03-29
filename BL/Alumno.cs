@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,11 +71,11 @@ namespace BL
         //        //throw;
         //    }
         //}
-        
+
         public static ML.Result Add(ML.Alumno alumno)
         {
             ML.Result result = new ML.Result();
-            try 
+            try
             {
                 using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
                 {
@@ -217,9 +218,10 @@ namespace BL
 
                         SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
 
+
                         dataAdapter.Fill(tableAlumno);
 
-                       // dataAdapter.
+                        // dataAdapter.
 
                         if (tableAlumno.Rows.Count > 0)
                         {
@@ -232,7 +234,7 @@ namespace BL
                                 alumno.Nombre = row[1].ToString();
                                 alumno.ApellidoPaterno = row[2].ToString();
                                 alumno.ApellidoMaterno = row[3].ToString();
-                                alumno.FechaNacimiento = DateTime.Parse(row[4].ToString());
+                                alumno.FechaNacimiento = row[4].ToString();
 
                                 alumno.Semestre = new ML.Semestre();
                                 alumno.Semestre.IdSemestre = byte.Parse(row[5].ToString());
@@ -280,7 +282,7 @@ namespace BL
                         cmd.Connection = context;
                         cmd.CommandText = query;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        
+
 
                         SqlParameter[] collection = new SqlParameter[1];
 
@@ -303,16 +305,16 @@ namespace BL
                             //result.Objects = new List<object>();
 
                             DataRow row = tableAlumno.Rows[0];
-                            
-                                ML.Alumno alumno = new ML.Alumno();
-                                alumno.IdAlumno = int.Parse(row[0].ToString());
-                                alumno.Nombre = row[1].ToString();
-                                alumno.ApellidoPaterno = row[2].ToString();
-                                alumno.ApellidoMaterno = row[3].ToString();
-                                alumno.FechaNacimiento = DateTime.Parse(row[4].ToString());
-                                //result.Objects.Add(alumno);
-                                result.Object = alumno;//boxing
-                            
+
+                            ML.Alumno alumno = new ML.Alumno();
+                            alumno.IdAlumno = int.Parse(row[0].ToString());
+                            alumno.Nombre = row[1].ToString();
+                            alumno.ApellidoPaterno = row[2].ToString();
+                            alumno.ApellidoMaterno = row[3].ToString();
+                            alumno.FechaNacimiento = row[4].ToString();
+                            //result.Objects.Add(alumno);
+                            result.Object = alumno;//boxing
+
 
                             result.Correct = true;
                         }
@@ -411,7 +413,7 @@ namespace BL
 
             try
             {
-                using(DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
                 {
                     int queryEF = context.AlumnoAdd(alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre);
 
@@ -425,12 +427,139 @@ namespace BL
             catch (Exception ex)
             {
                 result.Correct = false;
-                result.ErrorMessage = "Ocurrio un error al insertar el alumno" + ex;    
+                result.ErrorMessage = "Ocurrio un error al insertar el alumno" + ex;
             }
             return result;
         }
 
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
 
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    //var queryEF = context.AlumnoGetAll();
+                    var queryEFList = context.AlumnoGetAll().ToList();
+
+
+                    // dataAdapter.
+
+                    result.Objects = new List<object>();
+
+                    foreach (var row in queryEFList)
+                    {
+                        ML.Alumno alumno = new ML.Alumno();
+                        alumno.IdAlumno = row.IdAlumno;
+                        alumno.Nombre = row.Nombre;
+                        alumno.ApellidoPaterno = row.ApellidoPaterno;
+                        alumno.ApellidoMaterno = row.ApellidoMaterno;
+                        alumno.FechaNacimiento = row.FechaNacimiento;
+
+                        alumno.Semestre = new ML.Semestre();
+                        alumno.Semestre.IdSemestre = row.IdSemestre.Value;
+                        alumno.Semestre.Nombre = row.SemestreNombre;
+
+                        result.Objects.Add(alumno);
+                    }
+
+                    result.Correct = true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result.Correct = false;
+                result.Ex = ex;
+                result.ErrorMessage = "Ocurrió un error al actualizar el registro en la tabla Alumno" + result.Ex;
+                //throw;
+            }
+            return result;
+        }
+
+        public static ML.Result GetByIdEF(int IdAlumno)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+
+                    var objAlumno = context.AlumnoGetById(IdAlumno).FirstOrDefault();
+
+                    result.Objects = new List<object>();
+
+                    if (objAlumno != null)
+                    {
+
+                        ML.Alumno alumno = new ML.Alumno();
+                        alumno.IdAlumno = objAlumno.IdAlumno;
+                        alumno.Nombre = objAlumno.Nombre;
+                        alumno.ApellidoPaterno = objAlumno.ApellidoPaterno;
+                        alumno.ApellidoMaterno = objAlumno.ApellidoMaterno;
+                        alumno.FechaNacimiento = objAlumno.FechaNacimiento.ToString();
+                        alumno.Semestre = new ML.Semestre();
+
+                        //alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
+
+                        result.Object = alumno;
+
+
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Ocurrió un error al obtener los registros en la tabla Alumno";
+                    }
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+
+            return result;
+        }
+
+        //LINQ
+
+        public static ML.Result AddLINQ(ML.Alumno alumno)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    DL_EF.Alumno alumnoLINQ = new DL_EF.Alumno();
+
+                    alumnoLINQ.Nombre = alumno.Nombre;
+                    alumnoLINQ.ApellidoPaterno = alumno.ApellidoPaterno;
+                    alumnoLINQ.ApellidoMaterno = alumno.ApellidoMaterno;
+                    alumnoLINQ.FechaNacimiento = DateTime.Parse(alumno.FechaNacimiento);
+                    alumnoLINQ.IdSemestre = alumno.Semestre.IdSemestre;
+
+
+                    context.Alumnoes.Add(alumnoLINQ);
+                    context.SaveChanges();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
 
     }
 }

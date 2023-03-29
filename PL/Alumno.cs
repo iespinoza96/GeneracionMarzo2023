@@ -23,7 +23,7 @@ namespace PL
             Console.WriteLine("Inserte el apellido materno del alumno: ");
             alumno.ApellidoMaterno = Console.ReadLine();
             Console.WriteLine("Inserte la fecha nacimiento del alumno: ");
-            alumno.FechaNacimiento = DateTime.Parse(Console.ReadLine());
+            alumno.FechaNacimiento = Console.ReadLine();
 
             Console.WriteLine("Inserte el id del semestre: ");
             alumno.Semestre = new ML.Semestre();
@@ -32,7 +32,8 @@ namespace PL
             //Capa.Clase.Metodo(parametros);
             // ML.Result result = BL.Alumno.Add(alumno); //Query
            // ML.Result result = BL.Alumno.AddSP(alumno); //SP
-            ML.Result result = BL.Alumno.AddEF(alumno); //EF
+           // ML.Result result = BL.Alumno.AddEF(alumno); //EF
+            ML.Result result = BL.Alumno.AddLINQ(alumno); //EF
 
             if (result.Correct)
             {
@@ -65,7 +66,7 @@ namespace PL
             Console.WriteLine("Inserte el apellido materno del alumno: ");
             alumno.ApellidoMaterno = Console.ReadLine();
             Console.WriteLine("Inserte la fecha nacimiento del alumno: ");
-            alumno.FechaNacimiento = DateTime.Parse(Console.ReadLine());
+            alumno.FechaNacimiento = Console.ReadLine();
 
             //Capa.Clase.Metodo(parametros);
             ML.Result result = BL.Alumno.Update(alumno);
@@ -88,7 +89,8 @@ namespace PL
         //GetAll
         public static void GetAll()
         {
-            ML.Result result = BL.Alumno.GetAll();
+            //ML.Result result = BL.Alumno.GetAll(); //SP
+            ML.Result result = BL.Alumno.GetAllEF(); //EF
 
             if (result.Correct)
             {
@@ -99,7 +101,8 @@ namespace PL
                     Console.WriteLine("Apellido Paterno: " + alumno.ApellidoPaterno);
                     Console.WriteLine("Apellido Materno: " + alumno.ApellidoMaterno);
                     Console.WriteLine("Fecha de nacimiento:" + alumno.FechaNacimiento);
-                    Console.WriteLine("Semestre :" + alumno.Semestre.IdSemestre);
+                    Console.WriteLine("IdSemestre :" + alumno.Semestre.IdSemestre);
+                    Console.WriteLine("Semestre :" + alumno.Semestre.Nombre);
 
                     Console.WriteLine("-----------------------------------------------");
 

@@ -90,7 +90,8 @@ namespace PL
         public static void GetAll()
         {
             //ML.Result result = BL.Alumno.GetAll(); //SP
-            ML.Result result = BL.Alumno.GetAllEF(); //EF
+            //ML.Result result = BL.Alumno.GetAllEF(); //EF
+            ML.Result result = BL.Alumno.GetAllLINQ(); //LINQ
 
             if (result.Correct)
             {

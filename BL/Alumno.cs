@@ -561,5 +561,67 @@ namespace BL
             return result;
         }
 
+        public static ML.Result GetAllLINQ()
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    //var queryEF = context.AlumnoGetAll();
+                    //var queryLINQList = (from tablaUsuario in context.Alumnoes select tablaUsuario).ToList(); //SELECT * FROM Usuario
+
+                    var queryLINQList = (from tablaUsuario in context.Alumnoes
+                                         join tablaSemestre in context.Semestres on tablaUsuario.IdSemestre equals tablaSemestre.IdSemestre
+                                         //where tablaUsuario.IdSemestre == tablaSemestre.IdSemestre
+                                         select  new {
+
+                                             IdAlumno = tablaUsuario.IdAlumno,
+                                             Nombre = tablaUsuario.Nombre,
+                                             ApellidoPaterno = tablaUsuario.ApellidoPaterno,
+                                             ApellidoMaterno = tablaUsuario.ApellidoMaterno,
+                                             FechaNacimiento = tablaUsuario.FechaNacimiento,
+                                             IdSemestre = tablaUsuario.IdSemestre,
+                                             SemestreNombre = tablaSemestre.Nombre
+                                         }).ToList();// Select * from Usuario + inner join
+
+
+                    // dataAdapter.
+
+                    result.Objects = new List<object>();
+
+                    foreach (var row in queryLINQList)
+                    {
+                        ML.Alumno alumno = new ML.Alumno();
+                        alumno.IdAlumno = row.IdAlumno;
+                        alumno.Nombre = row.Nombre;
+                        alumno.ApellidoPaterno = row.ApellidoPaterno;
+                        alumno.ApellidoMaterno = row.ApellidoMaterno;
+                        alumno.FechaNacimiento = row.FechaNacimiento.Value.ToString("dd/MM/yyyy");
+
+                        alumno.Semestre = new ML.Semestre();
+                        alumno.Semestre.IdSemestre = row.IdSemestre.Value;
+                        alumno.Semestre.Nombre = row.SemestreNombre;
+
+                        result.Objects.Add(alumno);
+                    }
+
+                    result.Correct = true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result.Correct = false;
+                result.Ex = ex;
+                result.ErrorMessage = "Ocurrió un error al actualizar el registro en la tabla Alumno" + result.Ex;
+                //throw;
+            }
+            return result;
+        }
+
+
     }
 }

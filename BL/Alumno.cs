@@ -575,7 +575,8 @@ namespace BL
                     var queryLINQList = (from tablaUsuario in context.Alumnoes
                                          join tablaSemestre in context.Semestres on tablaUsuario.IdSemestre equals tablaSemestre.IdSemestre
                                          //where tablaUsuario.IdSemestre == tablaSemestre.IdSemestre
-                                         select  new {
+                                         select new
+                                         {
 
                                              IdAlumno = tablaUsuario.IdAlumno,
                                              Nombre = tablaUsuario.Nombre,
@@ -606,6 +607,70 @@ namespace BL
 
                         result.Objects.Add(alumno);
                     }
+
+                    result.Correct = true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result.Correct = false;
+                result.Ex = ex;
+                result.ErrorMessage = "Ocurrió un error al actualizar el registro en la tabla Alumno" + result.Ex;
+                //throw;
+            }
+            return result;
+        }
+
+        public static ML.Result GetByIdlLINQ(int idAlumno)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    //var queryEF = context.AlumnoGetAll();
+                    //var queryLINQList = (from tablaUsuario in context.Alumnoes select tablaUsuario).ToList(); //SELECT * FROM Usuario
+
+                    var queryLINQList = (from tablaUsuario in context.Alumnoes
+                                         join tablaSemestre in context.Semestres on tablaUsuario.IdSemestre equals tablaSemestre.IdSemestre
+                                         where tablaUsuario.IdAlumno == idAlumno
+                                         select new
+                                         {
+
+                                             IdAlumno = tablaUsuario.IdAlumno,
+                                             Nombre = tablaUsuario.Nombre,
+                                             ApellidoPaterno = tablaUsuario.ApellidoPaterno,
+                                             ApellidoMaterno = tablaUsuario.ApellidoMaterno,
+                                             FechaNacimiento = tablaUsuario.FechaNacimiento,
+                                             IdSemestre = tablaUsuario.IdSemestre,
+                                             SemestreNombre = tablaSemestre.Nombre
+                                         }).FirstOrDefault();// Select * from Usuario + inner join
+
+
+                    // dataAdapter.
+                    if (queryLINQList != null)
+                    {
+ 
+                            ML.Alumno alumno = new ML.Alumno();
+                            alumno.IdAlumno = queryLINQList.IdAlumno;
+                            alumno.Nombre = queryLINQList.Nombre;
+                            alumno.ApellidoPaterno = queryLINQList.ApellidoPaterno;
+                            alumno.ApellidoMaterno = queryLINQList.ApellidoMaterno;
+                            alumno.FechaNacimiento = queryLINQList.FechaNacimiento.Value.ToString("dd/MM/yyyy");
+
+                            alumno.Semestre = new ML.Semestre();
+                            alumno.Semestre.IdSemestre = queryLINQList.IdSemestre.Value;
+                            alumno.Semestre.Nombre = queryLINQList.SemestreNombre;
+
+                            result.Object = alumno;
+                        
+
+                    }
+              
+
 
                     result.Correct = true;
 

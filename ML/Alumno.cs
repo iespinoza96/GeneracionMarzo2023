@@ -20,5 +20,7 @@ namespace ML
 
         public ML.Semestre Semestre { get; set; }
 
+        public List<object> Alumnos { get; set; }
+
     }
 }

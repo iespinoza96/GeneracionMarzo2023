@@ -1,0 +1,63 @@
+﻿@model ML.Alumno
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section>
+        <h2>Módulo de alumno</h2>
+        <p>
+            En este modulo puedes visualizar a los alumnos existentes,<br />
+            agregar, modificar y eliminar un alumno
+        </p>
+    </section>
+    <section>
+        <div style="float:right;">
+            @Html.ActionLink("+", "Form", "Departamento", htmlAttributes: new { @class = "btn btn-success" })
+
+        </div>
+    </section>
+
+    <section>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <td class="text-center" style=" font-weight:bold;">Editar</td>
+
+                    <td class="hidden">IdAlumno</td>
+                    <td class="text-center" style="font-weight:bold;">Nombre</td>
+                    <td class="text-center" style="font-weight:bold;">Apellido Paterno</td>
+                    <td class="text-center" style="font-weight:bold;">Apellido Materno</td>
+                    <td class="text-center" style=" font-weight:bold;">Fecha de Nacimiento</td>
+                    <td class="hidden">IdSemestre</td>
+                    <td class="text-center" style=" font-weight:bold;">Semestre</td>
+
+                    <td class="text-center" style=" font-weight:bold;">Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (ML.Alumno alumno in Model.Alumnos)
+                {
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Departamento", new { IdAlumno = alumno.IdAlumno })"></a></td>
+                        <td class="hidden">@alumno.IdAlumno</td>
+                        <td>@alumno.Nombre</td>
+                        <td>@alumno.ApellidoPaterno</td>
+                        <td>@alumno.ApellidoMaterno</td>
+                        <td>@alumno.FechaNacimiento</td>
+                        <td class="hidden">@alumno.Semestre.IdSemestre</td>
+                        <td class="text-center">@alumno.Semestre.Nombre</td>
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Departamento", new { IdAlumno = alumno.IdAlumno})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </section>
+</div>
+
+
+
+

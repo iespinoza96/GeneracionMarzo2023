@@ -634,7 +634,7 @@ namespace BL
                     //var queryEF = context.AlumnoGetAll();
                     //var queryLINQList = (from tablaUsuario in context.Alumnoes select tablaUsuario).ToList(); //SELECT * FROM Usuario
 
-                    var queryLINQList = (from tablaUsuario in context.Alumnoes
+                    var queryLINQList = (from tablaUsuario in context.Alumnoes 
                                          join tablaSemestre in context.Semestres on tablaUsuario.IdSemestre equals tablaSemestre.IdSemestre
                                          where tablaUsuario.IdAlumno == idAlumno
                                          select new

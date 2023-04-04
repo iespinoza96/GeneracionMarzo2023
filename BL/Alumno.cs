@@ -432,6 +432,30 @@ namespace BL
             return result;
         }
 
+        public static ML.Result UpdateEF(ML.Alumno alumno)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    int queryEF = context.AlumnoUpdate(alumno.IdAlumno,alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre);
+
+                    if (queryEF > 0)
+                    {
+                        result.Correct = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrio un error al insertar el alumno" + ex;
+            }
+            return result;
+        }
         public static ML.Result GetAllEF()
         {
             ML.Result result = new ML.Result();
@@ -444,7 +468,7 @@ namespace BL
                     var queryEFList = context.AlumnoGetAll().ToList();
 
 
-                    // dataAdapter.
+          
 
                     result.Objects = new List<object>();
 
@@ -499,12 +523,13 @@ namespace BL
                         alumno.Nombre = objAlumno.Nombre;
                         alumno.ApellidoPaterno = objAlumno.ApellidoPaterno;
                         alumno.ApellidoMaterno = objAlumno.ApellidoMaterno;
-                        alumno.FechaNacimiento = objAlumno.FechaNacimiento.ToString();
+                        alumno.FechaNacimiento = objAlumno.FechaNacimiento;
+
                         alumno.Semestre = new ML.Semestre();
+                        alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
+                        alumno.Semestre.Nombre = objAlumno.SemestreNombre;
 
-                        //alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
-
-                        result.Object = alumno;
+                        result.Object = alumno; //boxing
 
 
                         result.Correct = true;

@@ -13,23 +13,30 @@
         </p>
     </section>
     <section>
+
         <div style="float:right;">
-            @Html.ActionLink("Agregar", "Form", "Alumno", htmlAttributes: new { @class = "btn btn-success bi bi-person-plus-fill" })
-            @*localhost/Alumno/Form      *@
+            <div class="row">
+                @Html.ActionLink("Agregar", "Form", "Alumno", htmlAttributes: new { @class = "btn btn-success bi bi-person-plus-fill" })
+                @*localhost/Alumno/Form      *@
 
 
+            </div>
         </div>
     </section>
     <hr />
     <section>
         @if (Model.Alumnos == null)
         {
-            <div class="alert alert-danger" role="alert">
-                @ViewBag.Message
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.Message
+                </div>
             </div>
         }
         else
         {
+
+
             <table class="table table-bordered table-responsive">
                 <thead>
                     <tr>

@@ -144,9 +144,7 @@
                 success: function (grupos) {
                     $("#ddlGrupo").append('<option value="0">' + 'Seleccione una opción' + '</option>');
                     $.each(grupos, function (i, grupos) {
-                        $("#ddlGrupo").append('<option value="'
-                                                   + grupos.IdGrupo + '">'
-                                                   + grupos.Nombre + '</option>');
+                        $("#ddlGrupo").append('<option value="' + grupos.IdGrupo + '">'+ grupos.Nombre + '</option>');
                     });
                 },
                 error: function (ex) {

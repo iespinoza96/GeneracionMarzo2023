@@ -117,7 +117,14 @@ namespace PL_MVC.Controllers
             return View("Modal");
         }
 
-    
+        public JsonResult GetGrupo(int idPlantel)
+        {
+            var result = BL.Grupo.GetByIdPlantel(idPlantel);
+
+            return Json(result.Objects);
+        }
+
+
 
 
     }

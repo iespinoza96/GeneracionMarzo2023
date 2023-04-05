@@ -17,8 +17,7 @@ namespace PL_MVC.Controllers
 
             if (result.Correct)
             {
-                alumno.Alumnos = result.Objects;
-               
+                alumno.Alumnos = result.Objects;               
             }
             else
             {
@@ -32,12 +31,19 @@ namespace PL_MVC.Controllers
         public ActionResult Form(int? idAlumno) 
         {
             ML.Result resultSemestres = BL.Semestre.GetAll();
+            ML.Result resultPlanteles = BL.Plantel.GetAll();
+
             ML.Alumno alumno = new ML.Alumno();
             alumno.Semestre = new ML.Semestre();
 
+            alumno.Horario = new ML.Horario();
+            alumno.Horario.Grupo = new ML.Grupo();
+            alumno.Horario.Grupo.Plantel = new ML.Plantel();
+
             if (resultSemestres.Correct)
             {
-                alumno.Semestre.Semestres = resultSemestres.Objects;
+               alumno.Semestre.Semestres = resultSemestres.Objects;
+               alumno.Horario.Grupo.Plantel.Planteles = resultPlanteles.Objects;
             }
             //add o update
             if (idAlumno == null)
@@ -57,6 +63,7 @@ namespace PL_MVC.Controllers
                     //update
                     //muestra el formulario con la informacion del alumno
                     alumno = (ML.Alumno)result.Object;
+                    alumno.Semestre.Semestres = resultSemestres.Objects;
                     return View(alumno);
 
                 }
@@ -110,11 +117,7 @@ namespace PL_MVC.Controllers
             return View("Modal");
         }
 
-        public ActionResult Delete(int id)
-        {
-            //bl.alumno.delete(id)
-            return View("Modal");
-        }
+    
 
 
     }

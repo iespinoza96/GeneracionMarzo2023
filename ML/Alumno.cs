@@ -15,6 +15,8 @@ namespace ML
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public string FechaNacimiento { get; set; }
+        public string NombreCompleto { get; set; }
+        public ML.Horario Horario { get; set; }
 
         //public byte IdSemestre { get; set; } //FK
 

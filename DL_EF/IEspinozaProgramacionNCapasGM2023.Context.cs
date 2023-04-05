@@ -29,6 +29,9 @@ namespace DL_EF
     
         public virtual DbSet<Alumno> Alumnoes { get; set; }
         public virtual DbSet<Semestre> Semestres { get; set; }
+        public virtual DbSet<Grupo> Grupoes { get; set; }
+        public virtual DbSet<Horario> Horarios { get; set; }
+        public virtual DbSet<Plantel> Plantels { get; set; }
     
         public virtual int AlumnoAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string fechaNacimiento, Nullable<byte> idSemestre)
         {
@@ -101,6 +104,20 @@ namespace DL_EF
         public virtual ObjectResult<SemestreGetAll_Result> SemestreGetAll()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemestreGetAll_Result>("SemestreGetAll");
+        }
+    
+        public virtual ObjectResult<PlantelGetAll_Result> PlantelGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PlantelGetAll_Result>("PlantelGetAll");
+        }
+    
+        public virtual ObjectResult<GrupoGetByIdPlantel_Result> GrupoGetByIdPlantel(Nullable<int> idPlantel)
+        {
+            var idPlantelParameter = idPlantel.HasValue ?
+                new ObjectParameter("IdPlantel", idPlantel) :
+                new ObjectParameter("IdPlantel", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GrupoGetByIdPlantel_Result>("GrupoGetByIdPlantel", idPlantelParameter);
         }
     }
 }

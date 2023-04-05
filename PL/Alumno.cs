@@ -91,8 +91,8 @@ namespace PL
         {
             //ML.Result result = BL.Alumno.GetAll(); //SP
             //ML.Result result = BL.Alumno.GetAllEF(); //EF
-            ML.Result result = BL.Alumno.GetAllLINQ(); //LINQ
-
+            //ML.Result result = BL.Alumno.GetAllLINQ(); //LINQ
+            ML.Result result = ML.Result();
             if (result.Correct)
             {
                 foreach (ML.Alumno alumno in result.Objects)

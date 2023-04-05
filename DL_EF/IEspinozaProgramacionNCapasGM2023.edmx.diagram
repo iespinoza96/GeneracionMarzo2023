@@ -8,6 +8,11 @@
         <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGM2023Model.Alumno" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGM2023Model.Semestre" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="IEspinozaProgramacionNCapasGM2023Model.FK_AlumnoSemestre" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGM2023Model.Grupo" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGM2023Model.Horario" Width="1.5" PointX="5.625" PointY="1.25" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGM2023Model.Plantel" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="IEspinozaProgramacionNCapasGM2023Model.FK__Horario__IdAlumn__4F7CD00D" />
+        <AssociationConnector Association="IEspinozaProgramacionNCapasGM2023Model.FK__Grupo__IdPlantel__4CA06362" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

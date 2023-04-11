@@ -66,10 +66,13 @@ namespace PL_MVC.Controllers
 
 
                     ML.Result resultGrupos = BL.Grupo.GetByIdPlantel(alumno.Horario.Grupo.Plantel.IdPlantel);
+                    
+                    //ML.Result resultMunicipios = BL.Municipio.GetByIdEstado(alumno.Direccion.Colonia.Municipio.Estado.IdEstado);
 
                     alumno.Horario.Grupo.Grupos = resultGrupos.Objects;
                     alumno.Semestre.Semestres = resultSemestres.Objects;
                     alumno.Horario.Grupo.Plantel.Planteles = resultPlanteles.Objects;
+                    //alumno.Direccion.Colonia.Municipio.Municipio = resultMunicipios.Objects;
 
                     return View(alumno);
 
@@ -140,7 +143,10 @@ namespace PL_MVC.Controllers
 
                 return data;
             }
-
+        public ActionResult Delete(int idAlumno)
+        {
+            return View();
+        }
 
         public JsonResult GetGrupo(int idPlantel)
         {

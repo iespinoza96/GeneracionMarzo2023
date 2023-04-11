@@ -415,7 +415,7 @@ namespace BL
             {
                 using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
                 {
-                    int queryEF = context.AlumnoAdd(alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre, alumno.Imagen, alumno.Horario.Turno);
+                    int queryEF = context.AlumnoAdd(alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre, alumno.Imagen, alumno.Horario.Turno, alumno.Horario.Grupo.IdGrupo);
 
                     if (queryEF > 0)
                     {
@@ -470,9 +470,6 @@ namespace BL
                     //var queryEF = context.AlumnoGetAll();
                     var queryEFList = context.AlumnoGetAll().ToList();
 
-
-          
-
                     result.Objects = new List<object>();
 
                     foreach (var row in queryEFList)
@@ -484,11 +481,23 @@ namespace BL
                         alumno.ApellidoMaterno = row.ApellidoMaterno;
                         alumno.FechaNacimiento = row.FechaNacimiento;
                         alumno.NombreCompleto = alumno.Nombre + alumno.ApellidoPaterno + alumno.ApellidoMaterno;
-                        //alumno.Imagen = row.Imagen;
+                        alumno.Imagen = row.Imagen;               
 
                         alumno.Semestre = new ML.Semestre();
                         alumno.Semestre.IdSemestre = row.IdSemestre.Value;
                         alumno.Semestre.Nombre = row.SemestreNombre;
+
+                        alumno.Horario = new Horario();
+                        alumno.Horario.Turno = row.Turno;
+
+                        alumno.Horario.Grupo = new ML.Grupo();
+                        alumno.Horario.Grupo.IdGrupo = row.IdGrupo;
+                        alumno.Horario.Grupo.Nombre = row.Grupo;
+
+                        alumno.Horario.Grupo.Plantel = new ML.Plantel();
+                        alumno.Horario.Grupo.Plantel.IdPlantel = row.IdPlantel;
+                        alumno.Horario.Grupo.Plantel.Nombre = row.Plantel;
+
 
                         result.Objects.Add(alumno);
                     }

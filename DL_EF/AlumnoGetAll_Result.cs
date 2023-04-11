@@ -20,5 +20,11 @@ namespace DL_EF
         public string FechaNacimiento { get; set; }
         public Nullable<byte> IdSemestre { get; set; }
         public string SemestreNombre { get; set; }
+        public string Imagen { get; set; }
+        public string Turno { get; set; }
+        public int IdGrupo { get; set; }
+        public string Grupo { get; set; }
+        public int IdPlantel { get; set; }
+        public string Plantel { get; set; }
     }
 }

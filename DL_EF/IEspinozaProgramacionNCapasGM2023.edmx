@@ -104,6 +104,7 @@
           <Parameter Name="IdSemestre" Type="tinyint" Mode="In" />
           <Parameter Name="Imagen" Type="varchar(max)" Mode="In" />
           <Parameter Name="Turno" Type="varchar" Mode="In" />
+          <Parameter Name="IdGrupo" Type="int" Mode="In" />
         </Function>
         <Function Name="AlumnoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdAlumno" Type="int" Mode="In" />
@@ -201,8 +202,8 @@
             <Parameter Name="IdSemestre" Mode="In" Type="Byte" />
             <Parameter Name="Imagen" Mode="In" Type="String" />
             <Parameter Name="Turno" Mode="In" Type="String" />
+            <Parameter Name="IdGrupo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AlumnoGetAll" ReturnType="Collection(IEspinozaProgramacionNCapasGM2023Model.AlumnoGetAll_Result)" />
           <FunctionImport Name="AlumnoUpdate">
             <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -232,21 +233,13 @@
             <End Role="Horario" EntitySet="Horarios" />
           </AssociationSet>
           <FunctionImport Name="AlumnoDelete">
-            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AlumnoGetById" ReturnType="Collection(IEspinozaProgramacionNCapasGM2023Model.AlumnoGetById_Result)">
-            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AlumnoGetAll" ReturnType="Collection(IEspinozaProgramacionNCapasGM2023Model.AlumnoGetAll_Result)" />
         </EntityContainer>
-        <ComplexType Name="AlumnoGetAll_Result">
-          <Property Type="Int32" Name="IdAlumno" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="30" />
-          <Property Type="Byte" Name="IdSemestre" Nullable="true" />
-          <Property Type="String" Name="SemestreNombre" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="SemestreGetAll_Result">
           <Property Type="Byte" Name="IdSemestre" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
@@ -337,6 +330,21 @@
           <Property Type="Int32" Name="IdGrupo" Nullable="false" />
           <Property Type="Int32" Name="IdPlantel" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="AlumnoGetAll_Result">
+          <Property Type="Int32" Name="IdAlumno" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="30" />
+          <Property Type="Byte" Name="IdSemestre" Nullable="true" />
+          <Property Type="String" Name="SemestreNombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Imagen" Nullable="true" />
+          <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdGrupo" Nullable="false" />
+          <Property Type="String" Name="Grupo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdPlantel" Nullable="false" />
+          <Property Type="String" Name="Plantel" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -365,19 +373,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AlumnoAdd" FunctionName="IEspinozaProgramacionNCapasGM2023Model.Store.AlumnoAdd" />
-          <FunctionImportMapping FunctionImportName="AlumnoGetAll" FunctionName="IEspinozaProgramacionNCapasGM2023Model.Store.AlumnoGetAll">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IEspinozaProgramacionNCapasGM2023Model.AlumnoGetAll_Result">
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
-                <ScalarProperty Name="SemestreNombre" ColumnName="SemestreNombre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AlumnoUpdate" FunctionName="IEspinozaProgramacionNCapasGM2023Model.Store.AlumnoUpdate" />
           <FunctionImportMapping FunctionImportName="SemestreGetAll" FunctionName="IEspinozaProgramacionNCapasGM2023Model.Store.SemestreGetAll">
             <ResultMapping>
@@ -445,6 +440,25 @@
                 <ScalarProperty Name="Turno" ColumnName="Turno" />
                 <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
                 <ScalarProperty Name="IdPlantel" ColumnName="IdPlantel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoGetAll" FunctionName="IEspinozaProgramacionNCapasGM2023Model.Store.AlumnoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IEspinozaProgramacionNCapasGM2023Model.AlumnoGetAll_Result">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+                <ScalarProperty Name="SemestreNombre" ColumnName="SemestreNombre" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+                <ScalarProperty Name="IdPlantel" ColumnName="IdPlantel" />
+                <ScalarProperty Name="Plantel" ColumnName="Plantel" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -415,7 +415,7 @@ namespace BL
             {
                 using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
                 {
-                    int queryEF = context.AlumnoAdd(alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre);
+                    int queryEF = context.AlumnoAdd(alumno.Nombre, alumno.ApellidoPaterno, alumno.ApellidoMaterno, alumno.FechaNacimiento, alumno.Semestre.IdSemestre, alumno.Imagen, alumno.Horario.Turno);
 
                     if (queryEF > 0)
                     {
@@ -484,6 +484,7 @@ namespace BL
                         alumno.ApellidoMaterno = row.ApellidoMaterno;
                         alumno.FechaNacimiento = row.FechaNacimiento;
                         alumno.NombreCompleto = alumno.Nombre + alumno.ApellidoPaterno + alumno.ApellidoMaterno;
+                        //alumno.Imagen = row.Imagen;
 
                         alumno.Semestre = new ML.Semestre();
                         alumno.Semestre.IdSemestre = row.IdSemestre.Value;
@@ -532,6 +533,15 @@ namespace BL
                         alumno.Semestre = new ML.Semestre();
                         alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
                         alumno.Semestre.Nombre = objAlumno.SemestreNombre;
+
+                        alumno.Horario = new ML.Horario();
+                        alumno.Horario.Turno = objAlumno.Turno;
+
+                        alumno.Horario.Grupo = new ML.Grupo();
+                        alumno.Horario.Grupo.IdGrupo = objAlumno.IdGrupo;
+
+                        alumno.Horario.Grupo.Plantel = new ML.Plantel();
+                        alumno.Horario.Grupo.Plantel.IdPlantel = objAlumno.IdPlantel;
 
                         result.Object = alumno; //boxing
 

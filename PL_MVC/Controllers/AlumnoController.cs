@@ -33,7 +33,7 @@ namespace PL_MVC.Controllers
             ML.Result resultSemestres = BL.Semestre.GetAll();
             ML.Result resultPlanteles = BL.Plantel.GetAll();
 
-            ML.Alumno alumno = new ML.Alumno();
+            ML.Alumno alumno = new ML.Alumno(); 
             alumno.Semestre = new ML.Semestre();
 
             alumno.Horario = new ML.Horario();
@@ -63,7 +63,14 @@ namespace PL_MVC.Controllers
                     //update
                     //muestra el formulario con la informacion del alumno
                     alumno = (ML.Alumno)result.Object;
+
+
+                    ML.Result resultGrupos = BL.Grupo.GetByIdPlantel(alumno.Horario.Grupo.Plantel.IdPlantel);
+
+                    alumno.Horario.Grupo.Grupos = resultGrupos.Objects;
                     alumno.Semestre.Semestres = resultSemestres.Objects;
+                    alumno.Horario.Grupo.Plantel.Planteles = resultPlanteles.Objects;
+
                     return View(alumno);
 
                 }
@@ -83,6 +90,14 @@ namespace PL_MVC.Controllers
         [HttpPost] //va a recibir la informacion que venga desde la vista  
         public ActionResult Form(ML.Alumno alumno)
         {
+            HttpPostedFileBase file = Request.Files["inpImagen"];
+
+            if (file.ContentLength > 0)
+            {
+                alumno.Imagen = Convert.ToBase64String(ConvertToBytes(file));
+
+            }
+
             ML.Result result = new ML.Result();
             //add o update
             if (alumno.IdAlumno == 0)
@@ -116,6 +131,16 @@ namespace PL_MVC.Controllers
 
             return View("Modal");
         }
+
+            public byte[] ConvertToBytes(HttpPostedFileBase Foto)
+            {
+                byte[] data = null;
+                System.IO.BinaryReader reader = new System.IO.BinaryReader(Foto.InputStream);
+                data = reader.ReadBytes((int)Foto.ContentLength);
+
+                return data;
+            }
+
 
         public JsonResult GetGrupo(int idPlantel)
         {

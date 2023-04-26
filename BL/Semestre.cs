@@ -45,5 +45,30 @@ namespace BL
             return result; 
         }
 
+        public static ML.Result Add(ML.Semestre semestre)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.IEspinozaProgramacionNCapasGM2023Entities context = new DL_EF.IEspinozaProgramacionNCapasGM2023Entities())
+                {
+                    int queryEF = context.SemestreAdd(semestre.Nombre);
+
+                    if (queryEF > 0)
+                    {
+                        result.Correct = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrio un error al insertar el semestre" + ex;
+            }
+            return result;
+        }
+
     }
 }

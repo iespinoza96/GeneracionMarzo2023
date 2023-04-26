@@ -33,7 +33,7 @@ namespace DL_EF
         public virtual DbSet<Horario> Horarios { get; set; }
         public virtual DbSet<Plantel> Plantels { get; set; }
     
-        public virtual int AlumnoAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string fechaNacimiento, Nullable<byte> idSemestre, string imagen, string turno, Nullable<int> idGrupo)
+        public virtual int AlumnoAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string fechaNacimiento, Nullable<byte> idSemestre)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -55,19 +55,7 @@ namespace DL_EF
                 new ObjectParameter("IdSemestre", idSemestre) :
                 new ObjectParameter("IdSemestre", typeof(byte));
     
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(string));
-    
-            var turnoParameter = turno != null ?
-                new ObjectParameter("Turno", turno) :
-                new ObjectParameter("Turno", typeof(string));
-    
-            var idGrupoParameter = idGrupo.HasValue ?
-                new ObjectParameter("IdGrupo", idGrupo) :
-                new ObjectParameter("IdGrupo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AlumnoAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, idSemestreParameter, imagenParameter, turnoParameter, idGrupoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AlumnoAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, idSemestreParameter);
         }
     
         public virtual int AlumnoUpdate(Nullable<int> idAlumno, string nombre, string apellidoPaterno, string apellidoMaterno, string fechaNacimiento, Nullable<byte> idSemestre)
@@ -139,6 +127,15 @@ namespace DL_EF
         public virtual ObjectResult<AlumnoGetAll_Result> AlumnoGetAll()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AlumnoGetAll_Result>("AlumnoGetAll");
+        }
+    
+        public virtual int SemestreAdd(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemestreAdd", nombreParameter);
         }
     }
 }

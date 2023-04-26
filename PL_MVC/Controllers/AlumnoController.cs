@@ -106,7 +106,7 @@ namespace PL_MVC.Controllers
             if (alumno.IdAlumno == 0)
             {
                 //add
-                result = BL.Alumno.AddEF(alumno);
+                //result = BL.Alumno.AddEF(alumno);
                 if (result.Correct)
                 {
                     ViewBag.Message = "Se inserto correctamente el alumno";

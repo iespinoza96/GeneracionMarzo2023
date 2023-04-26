@@ -431,8 +431,8 @@ namespace BL
         //    }
         //    return result;
         //}
-        //public static ML.Result Delete(ML.Alumno alumno)//un objeto de tipo ML.Alumno
-        //{
+        ////public static ML.Result Delete(ML.Alumno alumno)//un objeto de tipo ML.Alumno
+        ////{
 
         //}
         public static ML.Result UpdateEF(ML.Alumno alumno)

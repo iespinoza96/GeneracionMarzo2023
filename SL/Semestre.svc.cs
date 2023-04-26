@@ -11,18 +11,38 @@ namespace SL
     // NOTE: In order to launch WCF Test Client for testing this service, please select Semestre.svc or Semestre.svc.cs at the Solution Explorer and start debugging.
     public class Semestre : ISemestre
     {
-        public ML.Result Add(ML.Semestre semestre)
+        public SL.Result Add(ML.Semestre semestre)
         {
             ML.Result result = new ML.Result();
 
             result = BL.Semestre.Add(semestre);
+            return new SL.Result
+            {
+                Correct = result.Correct,
+                ErrorMessage = result.ErrorMessage,
+                Object = result.Object,
+                Objects = result.Objects
+            };
 
-            return result;
+        }
+
+        public SL.Result GetAll()
+        {
+            ML.Result result = BL.Semestre.GetAll();
+            return new SL.Result
+            {
+                Correct = result.Correct,
+                ErrorMessage = result.ErrorMessage,
+                Object = result.Object,
+                Objects = result.Objects
+            };
         }
 
         public string Saludar(string nombre)
         {
             return "Hola " + nombre;
         }
+
+
     }
 }

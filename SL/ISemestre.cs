@@ -12,8 +12,11 @@ namespace SL
     public interface ISemestre
     {
         [OperationContract]
-        ML.Result Add(ML.Semestre semestre);
+        SL.Result Add(ML.Semestre semestre);
 
-       
+        [OperationContract]
+        [ServiceKnownType(typeof(ML.Semestre))]
+        SL.Result GetAll(); 
+
     }
 }

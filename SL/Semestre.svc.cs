@@ -16,6 +16,7 @@ namespace SL
             ML.Result result = new ML.Result();
 
             result = BL.Semestre.Add(semestre);
+
             return new SL.Result
             {
                 Correct = result.Correct,
@@ -23,7 +24,6 @@ namespace SL
                 Object = result.Object,
                 Objects = result.Objects
             };
-
         }
 
         public SL.Result GetAll()

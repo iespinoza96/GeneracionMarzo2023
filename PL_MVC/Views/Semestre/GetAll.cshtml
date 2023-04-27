@@ -1,0 +1,62 @@
+﻿@model ML.Semestre
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <section>
+        <h2>Módulo de Semestres</h2>
+    </section>
+    <section>
+
+        <div style="float:right;">
+            <div class="row">
+                @Html.ActionLink("Agregar", "Form", "Alumno", htmlAttributes: new { @class = "btn btn-success bi bi-person-plus-fill" })
+            </div>
+        </div>
+    </section>
+    <hr />
+    <section>
+        @if (Model.Semestres == null)
+        {
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.Message
+                </div>
+            </div>
+        }
+        else
+        {
+
+
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td class="text-center" style=" font-weight:bold;">Editar</td>
+                        <td class="visually-hidden">IdAlumno</td>
+                        <td class="text-center" style="font-weight:bold;">Nombre</td>
+                        <td class="text-center" style=" font-weight:bold;">Eliminar</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (ML.Semestre semeste in Model.Semestres)
+                    {
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form", "Alumno", new { IdAlumno = semeste.IdSemestre })"></a></td>
+                        <td class="visually-hidden">@semeste.IdSemestre</td>
+                        <td>@semeste.Nombre</td>
+                        <td class="text-center" style=" font-weight:bold;"><i class="bi bi-trash"></i></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+
+
+
+    </section>
+</div>

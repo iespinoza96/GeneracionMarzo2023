@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="f0b6d558-6681-4fd3-95b9-42e8dbff578e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="ec0b0ce9-6aea-4133-8301-6b27203cd16b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,13 +22,14 @@
     <MetadataSource Address="http://localhost:25497/Semestre.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Semestre.xsd" MetadataType="Schema" ID="4e9d85da-a1cf-4992-9ef2-37288f104549" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd3" />
-    <MetadataFile FileName="Semestre.disco" MetadataType="Disco" ID="86bf680a-6a4d-4438-bf2c-ac34303fd7eb" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?disco" />
-    <MetadataFile FileName="Semestre1.xsd" MetadataType="Schema" ID="18a920e8-c3d7-499e-b609-8923e2e1a9dc" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd0" />
-    <MetadataFile FileName="Semestre2.xsd" MetadataType="Schema" ID="377eff5c-1778-452c-b357-d05b0019ef36" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd1" />
-    <MetadataFile FileName="Semestre.wsdl" MetadataType="Wsdl" ID="fd0ce2b1-e7de-4389-b979-c8c10b30c0ee" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?wsdl" />
-    <MetadataFile FileName="Semestre3.xsd" MetadataType="Schema" ID="356feca0-86a2-4a44-ac79-0535e43840c0" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd4" />
-    <MetadataFile FileName="Semestre4.xsd" MetadataType="Schema" ID="f1f93191-04cf-476a-a466-9f50f9e29053" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd2" />
+    <MetadataFile FileName="Semestre.xsd" MetadataType="Schema" ID="b07746ae-7eed-42cc-b0b0-d8690e3f191b" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd3" />
+    <MetadataFile FileName="Semestre1.xsd" MetadataType="Schema" ID="cc4f30bf-68d1-431a-9c61-c782c305cde4" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd5" />
+    <MetadataFile FileName="Semestre.disco" MetadataType="Disco" ID="030da980-2610-46d2-988b-7bf3b5773913" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?disco" />
+    <MetadataFile FileName="Semestre2.xsd" MetadataType="Schema" ID="89447936-8945-4738-ab85-fbd3b3e23e1c" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd0" />
+    <MetadataFile FileName="Semestre3.xsd" MetadataType="Schema" ID="c673b79c-383c-40e3-97cd-1443bc09dd87" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd1" />
+    <MetadataFile FileName="Semestre.wsdl" MetadataType="Wsdl" ID="035f9dfe-95e5-4492-9179-e514302cf1ad" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?wsdl" />
+    <MetadataFile FileName="Semestre4.xsd" MetadataType="Schema" ID="c336164d-ffcd-49cf-91c2-af027fc4d9f2" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd4" />
+    <MetadataFile FileName="Semestre5.xsd" MetadataType="Schema" ID="62a4e7cc-7d1e-4b21-b563-e77320943a5c" SourceId="1" SourceUrl="http://localhost:25497/Semestre.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -6,7 +6,8 @@
       <xsd:import schemaLocation="http://localhost:25497/Semestre.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:25497/Semestre.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ML" />
       <xsd:import schemaLocation="http://localhost:25497/Semestre.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:25497/Semestre.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:25497/Semestre.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SL" />
+      <xsd:import schemaLocation="http://localhost:25497/Semestre.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ISemestre_Add_InputMessage">
@@ -15,16 +16,35 @@
   <wsdl:message name="ISemestre_Add_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddResponse" />
   </wsdl:message>
+  <wsdl:message name="ISemestre_GetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAll" />
+  </wsdl:message>
+  <wsdl:message name="ISemestre_GetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISemestre">
     <wsdl:operation name="Add">
       <wsdl:input wsaw:Action="http://tempuri.org/ISemestre/Add" message="tns:ISemestre_Add_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISemestre/AddResponse" message="tns:ISemestre_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISemestre/GetAll" message="tns:ISemestre_GetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISemestre/GetAllResponse" message="tns:ISemestre_GetAll_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISemestre" type="tns:ISemestre">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Add">
       <soap:operation soapAction="http://tempuri.org/ISemestre/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <soap:operation soapAction="http://tempuri.org/ISemestre/GetAll" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

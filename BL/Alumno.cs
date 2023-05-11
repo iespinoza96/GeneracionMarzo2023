@@ -197,7 +197,6 @@ namespace BL
         }
 
         //GetAll 
-
         public static ML.Result GetAll()
         {
             ML.Result result = new ML.Result();

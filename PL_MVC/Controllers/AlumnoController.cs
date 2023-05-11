@@ -145,6 +145,7 @@ namespace PL_MVC.Controllers
             }
         public ActionResult Delete(int idAlumno)
         {
+            ML.Result result = BL.Alumno.GetById(idAlumno);
             return View();
         }
 

@@ -16,7 +16,6 @@ namespace SL
 
         [OperationContract]
         [ServiceKnownType(typeof(ML.Semestre))]
-        SL.Result GetAll(); 
-
+        SL.Result GetAll();
     }
 }
